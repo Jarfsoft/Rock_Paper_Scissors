@@ -1,0 +1,68 @@
+<script>
+  function computerPlay()
+  {
+      let n = Math.floor(Math.random() * 3) + 1;
+      let play;
+      if(n==1)
+        play="rock";
+      else if(n==2)
+        play="paper";
+      else
+        play="scissors";
+      return play;
+  }
+  function playRound(playerSelection, computerSelection)
+  {
+      if("rock" == playerSelection.toLowerCase() || "paper" == playerSelection.toLowerCase() || "scissors" == playerSelection.toLowerCase())
+      {
+        if(playerSelection==computerSelection)
+        {
+            return "Draw, you both went for "+ com+".";
+        }
+        else
+        {
+            if("rock" == playerSelection.toLowerCase())
+            {
+                if(computerSelection == "scissors")
+                    return "You win! Rock beats Scissors.";
+                else 
+                    return "You lose! Paper beats Rock.";
+            }
+            else if("paper" == playerSelection.toLowerCase())
+            {
+                if(computerSelection == "rock")
+                    return "You win! Paper beats Rock.";
+                else
+                    return "You lose! Scissors beats Paper."
+            }
+            else
+            {
+                if(computerSelection == "paper")
+                    return "You win! Scissors beats Paper.";
+                else
+                    return "You lose! Rock beats Scissors."
+            }
+        }
+      }
+      else
+        return "Not a valid input. Just 'Rock/Paper/Scissors'";
+  }
+  function game()
+  {
+      let input, output;
+      let com=0;
+      let pla=0;
+      for(let i = 0; i<5 ; i++)
+      {
+        input=window.prompt("Write: Rock/Paper/Scissors");
+        output=playRound(input,computerPlay);
+        if(output[4]='w')
+            pla++;
+        else(output[4]=='l')
+            com++;
+        else
+            i--;
+        console.log(output+" You: "+pla+" CPU: "+com);
+      }
+  }
+</script>
