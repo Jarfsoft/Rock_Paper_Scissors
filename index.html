@@ -17,7 +17,7 @@
       {
         if(playerSelection==computerSelection)
         {
-            return "Draw, you both went for "+ com+".";
+            return "Draw, you both went for "+ computerSelection+".";
         }
         else
         {
@@ -55,14 +55,16 @@
       for(let i = 0; i<5 ; i++)
       {
         input=window.prompt("Write: Rock/Paper/Scissors");
-        output=playRound(input,computerPlay);
-        if(output[4]='w')
+        output=playRound(input,computerPlay());
+        if(output[4]=='w')
             pla++;
-        else(output[4]=='l')
+        else if(output[4]=='l')
             com++;
         else
             i--;
         console.log(output+" You: "+pla+" CPU: "+com);
       }
   }
+
+  game();
 </script>
