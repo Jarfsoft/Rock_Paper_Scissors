@@ -1,3 +1,15 @@
+<html>
+    <div id="result">YOU: 0 CPU: 0</div>
+    <div id="CPU">CPU played: </div>
+    <div id="buttons">
+        <button type='button' id="1">Rock</button>
+        <button type='button' id="2">Paper</button>
+        <button type='button' id="3">Scissors</button>
+    </div>
+    <div id="win"></div>
+</html>
+
+
 <script>
   function computerPlay()
   {
@@ -13,58 +25,95 @@
   }
   function playRound(playerSelection, computerSelection)
   {
+    let prev = document.querySelector("#result");
+    let pla = prev.textContent[5];
+    let com = prev.textContent[12];
       if("rock" == playerSelection.toLowerCase() || "paper" == playerSelection.toLowerCase() || "scissors" == playerSelection.toLowerCase())
       {
         if(playerSelection==computerSelection)
         {
-            return "Draw, you both went for "+ computerSelection+".";
+            document.querySelector("#win").textContent = "Draw, you both went for "+ computerSelection+".";
         }
         else
         {
             if("rock" == playerSelection.toLowerCase())
             {
                 if(computerSelection == "scissors")
-                    return "You win! Rock beats Scissors.";
+                {
+                    pla++;
+                    document.querySelector("#win").textContent = "You win! Rock beats Scissors.";
+                }
                 else 
-                    return "You lose! Paper beats Rock.";
+                {
+                    com++;
+                    document.querySelector("#win").textContent = "You lose! Paper beats Rock.";
+                }
             }
             else if("paper" == playerSelection.toLowerCase())
             {
                 if(computerSelection == "rock")
-                    return "You win! Paper beats Rock.";
+                {
+                    pla++;
+                    document.querySelector("#win").textContent = "You win! Paper beats Rock.";
+                }
                 else
-                    return "You lose! Scissors beats Paper."
+                {
+                    com++;
+                    document.querySelector("#win").textContent = "You lose! Scissors beats Paper.";
+                }
+                    
             }
             else
             {
                 if(computerSelection == "paper")
-                    return "You win! Scissors beats Paper.";
+                {
+                    pla++;
+                    document.querySelector("#win").textContent = "You win! Scissors beats Paper.";
+                }
                 else
-                    return "You lose! Rock beats Scissors."
+                {
+                    com++;
+                    document.querySelector("#win").textContent = "You lose! Rock beats Scissors.";
+                }
             }
         }
       }
       else
-        return "Not a valid input. Just 'Rock/Paper/Scissors'";
-  }
-  function game()
-  {
-      let input, output;
-      let com=0;
-      let pla=0;
-      for(let i = 0; i<5 ; i++)
-      {
-        input=window.prompt("Write: Rock/Paper/Scissors");
-        output=playRound(input,computerPlay());
-        if(output[4]=='w')
-            pla++;
-        else if(output[4]=='l')
-            com++;
-        else
-            i--;
-        console.log(output+" You: "+pla+" CPU: "+com);
-      }
+        console.log("Not a valid input. Just 'Rock/Paper/Scissors'");
+    if(pla==5)
+    {
+        document.querySelector("#win").textContent = "Game Set! You win. :)";
+        com=0;
+        pla=0;
+    }
+    else if(com==5)
+    {
+        document.querySelector("#win").textContent = "Game Set! You lose. :(";
+        com=0;
+        pla=0;
+    }
+    document.querySelector("#CPU").textContent = "CPU played: " + computerSelection;
+    prev.textContent = "YOU: "+ pla +" CPU: "+ com;
+    return;
   }
 
-  game();
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let input;
+        if(button.id == "1")
+        {
+            input = "rock";
+        }
+        else if(button.id == "2")
+        {
+            input = "paper";
+        }
+        else
+        {
+            input = "scissors";
+        }
+        playRound(input,computerPlay());
+    });
+  });
 </script>
